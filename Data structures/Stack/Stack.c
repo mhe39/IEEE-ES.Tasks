@@ -1,57 +1,90 @@
-#include <stdio.h>
 #include<stdio.h>
 #include"STDTYPE.h"
 #include"Stack_Fun.h"
 
-int main()
-{
-Stack S;
-Stack *ptr=&S;
-u64 e  ,x,cond=1; // cond to push or pop a member ....e is a member
-Stack_Ctreate (&S);
-
-while(cond!=0)
+ void Stack_Ctreate (Stack*PS)
 {
 
-if(isfull (&S))
-{
- break;
-}
-else 
-{
-printf("Enter the member:");
-scanf("%d",&e);
- push(e,&S);
+PS-> top = 0 ; 
 
 }
-scanf("%d",&cond);
-}
 
-printf("Pop...?");
 
-scanf("%d",&cond);
-while(cond!=0)
+
+
+
+ u64 isempty (Stack*PS)
 {
-if(isempty (&S))
+
+if(PS-> top == 0 ) 
 {
-break;
+return 1 ;
 }
 else
 {
-pop(e,&S);
-}
-scanf("%d",&cond);
+    return 0;
 }
 
+}
 
+ u64 isfull (Stack*ps)
+{
 
- Clear_Stack(&S); 
+if(ps-> top == Max_Stack ) 
+{
+return 1 ;
+}
+else
+{
+    return 0;
+}
+}
 
- Stack_Display(&S);
-
- x = Stack_Size(&S);
- printf("Size=%d" ,x);
-
-
+ u64 push (u64 e,Stack*ps)
+{
+if((ps -> top )< Max_Stack )
+{ 
+ps->arr[ps->top]=e ;
+ps->top++;
+return 1 ;
+}
+else
+{
  return 0;
+}
+
+}
+
+ u64 pop(u64 e ,Stack*ps)
+{
+if(ps-> top == 0 )
+{ 
+
+return 0;
+}
+else
+{
+    u64 e=ps->arr[--ps->top];
+    return 1;
+}
+}
+
+ void Clear_Stack(Stack*ps)
+{
+ps->top=0;
+}
+
+ u64 Stack_Size(Stack*ps)
+{
+    return ps->top ;
+}
+
+ void Stack_Display(Stack*ps)
+{
+    printf(">>>>>\n");
+ for(u64 i =0;i< ps->top;i++)
+{
+    printf("%d\n" ,ps->arr[i]);
+}
+   printf("top=%d..." ,ps->top);
 }
