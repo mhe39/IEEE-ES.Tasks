@@ -10,7 +10,7 @@ typedef int Queue_Entry;
 typedef struct queue_node
 {
 Queue_Entry e ;
-
+ 
 struct queue_node * next ; 
 
 }Queue_Node;

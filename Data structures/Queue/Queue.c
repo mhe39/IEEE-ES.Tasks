@@ -6,9 +6,9 @@
 
  void Create_Queue (Queue*pq)
 {
-int front = 0 ;
+pq -> front = NULL ;
 
-int rear = -1 ;
+pq -> rear = NULL ;
 
 int size = 0 ;
 
@@ -51,7 +51,7 @@ if(!pq->rear)
 }
 pq->rear= pn;
 
-pq -> size ++ ;
+pq -> size++;
  
 return 1 ; 
 }
