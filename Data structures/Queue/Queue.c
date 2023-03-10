@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include"STDTYPE.h"
 #include"Queue_Fun.h"
 #include<stdlib.h>
 
@@ -10,7 +9,7 @@ pq -> front = NULL ;
 
 pq -> rear = NULL ;
 
-int size = 0 ;
+pq -> size = 0 ;
 
 }
 
@@ -34,7 +33,12 @@ return pq -> size ;
 
  int Append (Queue_Entry e,Queue*pq)
 {
-Queue_Node *pn = (Queue_Node*) malloc (sizeof(Queue_Node)) ;       
+Queue_Node *pn = (Queue_Node*) malloc (sizeof(Queue_Node)) ;
+
+pn-> e = e ;
+
+pn-> next = NULL ; 
+
 if (!pn) // here the pointer pn is NULL which means that the allocation is not successful.
 {
     return 0 ;
@@ -60,13 +64,15 @@ return 1 ;
 }
 
 
- void Serve(Queue_Entry *pe ,Queue*pq)
+ void Serve(Queue_Entry e ,Queue*pq)
 {
 Queue_Node *pn = (Queue_Node*) malloc (sizeof(Queue_Node))  ;
 
-*pe = pn->e ;
+pn-> e = e ;
 
-pq->front = pn->next ;
+pn-> next = pq->front ; 
+
+pq->front = pq->front->next ;
 
 free(pn);
 

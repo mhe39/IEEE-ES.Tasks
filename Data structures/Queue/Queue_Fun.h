@@ -1,7 +1,11 @@
 #ifndef Queue_Fun_H_
 #define Queue_Fun_H_
 #define Max_Queue 5
-#include"STDTYPE.h" 
+
+
+
+
+
 
 
 typedef int Queue_Entry;
@@ -31,7 +35,7 @@ int QueueFull (Queue*) ;
 
 int Append (Queue_Entry,Queue*);
 
-void Serve(Queue_Entry*,Queue*);
+void Serve(Queue_Entry,Queue*);
 
 void Clear_Queue(Queue*) ; 
 
