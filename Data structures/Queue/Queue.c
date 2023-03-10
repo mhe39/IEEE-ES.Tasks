@@ -10,7 +10,7 @@ pq -> front = NULL ;
 
 pq -> rear = NULL ;
 
-int size = 0 ;
+pq -> size = 0 ;
 
 }
 
