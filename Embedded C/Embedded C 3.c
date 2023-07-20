@@ -1,20 +1,26 @@
 #include <stdio.h> 
+#include <stdlib.h>
+#include<math.h>
 #include"STDTYPE.h"
-u32 Add(u32, u32);
-u32 Sub (u32,u32);
-u32 Mult (u32,u32);
-u32 Div (u32,u32);
-u32 Fun (u32 (*)(u32,u32),u32,u32);
-u32 main()
+f32 Add(f32, f32);
+f32 Sub (f32,f32);
+f32 Mult (f32,f32);
+f32 Div (f32,f32);
+f32 Fun (f32 (*)(f32,f32),f32,f32);
+
+int main()
 {
-u32 res,x,y,cond ;
-scanf("%d %d",&x,&y) ;
+f32 res,x,y;
+u32 cond ; 
+
+scanf("%f %f",&x,&y);
+fflush(stdin) ;
 
 printf("1:ADD \n2:SUB \n3:MULT \n4:DIV \n5:All \nELSE:EXIT\n"); 
 
-res = Fun(&Div,3,5);
+scanf("%d",&cond) ;
+fflush(stdin) ;
 
-scanf("%d",&cond) ; 
 switch (cond)
 {
 case 1:
@@ -36,58 +42,63 @@ break ;
 
 case 5:
 res = Fun(&Add,x,y);// ADDITION
-printf("%d\n",res) ;
+printf("%.3f\n",res) ;
 res = Fun(&Sub,x,y);// SUBTRACTION
-printf("%d\n",res) ;
+printf("%.3f\n",res) ;
 res = Fun(&Mult,x,y);// MULTIPLICATION
-printf("%d\n",res) ;
+printf("%.3f\n",res) ;
 res = Fun(&Div,x,y);// DIVISION
 
 break ;
 
 default:
-break;
+exit(0);
+
 }
 
 
 
-printf("%d",res) ;
+printf("%.3f",res) ;
 
 return 0;
 }
 
 /**********************************************************************************/
 
-u32 Fun(u32(*ptr)(u32,u32),u32 x,u32 y )
+f32 Fun(f32(*ptr)(f32,f32),f32 x,f32 y )
 {
-(*ptr)(x,y);
+return (*ptr)(x,y);
 }
 
 
-u32 Add(u32 x , u32 y)
+f32 Add(f32 x , f32 y)
 {
 
 
 return x+y ;
 }
 
-u32 Sub(u32 x , u32 y)
+f32 Sub(f32 x , f32 y)
 {
 
 
 return x-y ;
 }
 
-u32 Mult(u32 x , u32 y)
+f32 Mult(f32 x , f32 y)
 {
 
 
 return x*y ;
 }
 
-u32 Div(u32 x , u32 y)
+f32 Div(f32 x , f32 y)
 {
-
+if((x==0 && y==0) || (y==0) )
+{
+    printf("mathmatical error") ;
+    exit(0); 
+}
 
 return x/y ;
 }
