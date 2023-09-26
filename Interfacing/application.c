@@ -49,15 +49,28 @@
  uint8 portc_logic_status;
 int main() {
   
-   application_intialize () ;
+   //application_intialize () ;
   
-   
+    gpio_pin_intialize(&led_1);
+    gpio_pin_intialize(&led_2);
+    gpio_pin_intialize(&led_3);
+    
+    gpio_double_pin_write_logic(&led_1,&led_2,GPIO_HIGH) ;
+    
+     __delay_ms(1000);
+     gpio_pin_write_logic(&led_3,GPIO_HIGH);
      while(1)
      {
-    
-         gpio_port_toggle_logic(PORTC_INDEX) ;
+           
+         gpio_double_pin_toggle_logic(&led_1,&led_2);
          
-         __delay_ms(100);
+         __delay_ms(1000);
+         
+         gpio_pin_toggle_logic(&led_3) ;
+         
+        // gpio_port_toggle_logic(PORTC_INDEX) ;
+         
+        // __delay_ms(100);
         // gpio_pin_toggle_logic(&led_1) ;
          // __delay_ms(250) ;
           

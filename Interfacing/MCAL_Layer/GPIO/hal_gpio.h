@@ -37,11 +37,11 @@
 #define TOGGLE_BIT(REG,BIT_POSN) (REG ^= (BIT_MASK<<BIT_POSN)) 
 #define READ_BIT(REG,BIT_POSN) ((REG>>BIT_POSN)&BIT_MASK) 
 
-//#define MOHAMED_SET_2_BITS(REG,1ST_BIT_POSN,2ND_BIT_POSN)  (REG|= (BIT_MASK << (1ST_BIT_POSN|2ND_BIT_POSN)))
+#define MOHAMED_SET_2_BITS(REG,BIT_1ST_POSN,BIT_2ND_POSN)  (REG |= ( (BIT_MASK <<BIT_1ST_POSN) | (BIT_MASK <<BIT_2ND_POSN) ))
 
-//#define MOHAMED_CLEAR_2_BITS(REG,1ST_BIT_POSN,2ND_BIT_POSN)  (REG&= ~((BIT_MASK << (1ST_BIT_POSN|2ND_BIT_POSN))))  
+#define MOHAMED_CLEAR_2_BITS(REG,BIT_1ST_POSN,BIT_2ND_POSN)  (REG &= ~(( (BIT_MASK <<BIT_1ST_POSN) | (BIT_MASK <<BIT_2ND_POSN) )) )  
 
-//#define MOHAMED_TOGGLE_2_BITS(REG,1ST_BIT_POSN,2ND_BIT_POSN)  (REG^= (BIT_MASK << (1ST_BIT_POSN|2ND_BIT_POSN)))  
+#define MOHAMED_TOGGLE_2_BITS(REG,BIT_1ST_POSN,BIT_2ND_POSN)  (REG ^= ( (BIT_MASK <<BIT_1ST_POSN) | (BIT_MASK <<BIT_2ND_POSN) ))  
 
 
 
@@ -99,6 +99,9 @@ Std_ReturnType gpio_pin_toggle_logic (const pin_config_t *_pin_config) ;
 Std_ReturnType gpio_pin_intialize (const pin_config_t *_pin_config) ;
 
 
+Std_ReturnType gpio_double_pin_write_logic (const pin_config_t *_pin_config1,const pin_config_t *_pin_config2,logic_t logic) ;
+Std_ReturnType gpio_double_pin_read_logic (const pin_config_t *_pin_config1,const pin_config_t *_pin_config2,logic_t *logic1,logic_t *logic2) ;
+Std_ReturnType gpio_double_pin_toggle_logic (const pin_config_t *_pin_config1,const pin_config_t *_pin_config2) ;
 
 Std_ReturnType gpio_port_direction_intialize (port_index_t port,uint8 direction) ;
 Std_ReturnType gpio_port_get_direction_status (port_index_t port,uint8 *direction_status ) ;

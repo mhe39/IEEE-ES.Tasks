@@ -193,6 +193,117 @@ Std_ReturnType gpio_pin_toggle_logic (const pin_config_t *_pin_config)
 
 /**
  * 
+ * @param _pin_config1
+ * @param _pin_config2
+ * @param logic
+ * @return 
+ */
+
+
+# if GPIO_PORT_PIN_CONFIGURATIONS == CONFIG_ENABLE 
+Std_ReturnType gpio_double_pin_write_logic (const pin_config_t *_pin_config1,const pin_config_t *_pin_config2,logic_t logic) 
+{
+    
+    
+    
+     Std_ReturnType ret = E_OK ;
+        if(NULL==_pin_config1 || NULL==_pin_config2 || _pin_config1->pin > PORT_PIN_MAX_NUMBER-1 || _pin_config2->pin > PORT_PIN_MAX_NUMBER-1 ||_pin_config1->port != _pin_config2->port )
+    {
+        ret = E_NOT_OK ; 
+       
+    }
+     
+    else
+    {
+           switch(logic)
+          {
+            
+            
+            case GPIO_LOW :
+                MOHAMED_CLEAR_2_BITS(*lat_registers [_pin_config1->port],_pin_config1->pin,_pin_config2->pin);
+                break;
+                
+            case GPIO_HIGH :   
+                  MOHAMED_SET_2_BITS(*lat_registers [_pin_config1->port],_pin_config1->pin,_pin_config2->pin);
+                break;
+            
+            default :
+             ret = E_NOT_OK ;    
+           }       
+            
+    }
+     return ret ;
+    
+}
+
+#endif
+
+/**
+ * 
+ * @param _pin_config1
+ * @param _pin_config2
+ * @param logic1
+ * @param logic2
+ * @return 
+ */
+
+# if GPIO_PORT_PIN_CONFIGURATIONS == CONFIG_ENABLE 
+Std_ReturnType gpio_double_pin_read_logic (const pin_config_t *_pin_config1,const pin_config_t *_pin_config2,logic_t *logic1,logic_t *logic2)
+{
+    
+Std_ReturnType ret = E_OK ;
+        if( NULL == logic1 ||NULL == logic2 || NULL==_pin_config1 || NULL==_pin_config2 || _pin_config1->pin > PORT_PIN_MAX_NUMBER-1 || _pin_config2->pin > PORT_PIN_MAX_NUMBER-1 ||_pin_config1->port != _pin_config2->port )
+       {
+        ret = E_NOT_OK ; 
+       
+       }
+    
+        else
+        {
+         *logic1 = READ_BIT(*port_registers [_pin_config1->port],_pin_config1->pin) ;  
+
+         *logic2 = READ_BIT(*port_registers [_pin_config1->port],_pin_config1->pin) ;
+
+        }
+    
+     return ret ;
+  }
+#endif
+
+/**
+ * 
+ * @param _pin_config1
+ * @param _pin_config2
+ * @return 
+ */
+
+# if GPIO_PORT_PIN_CONFIGURATIONS == CONFIG_ENABLE 
+Std_ReturnType gpio_double_pin_toggle_logic (const pin_config_t *_pin_config1,const pin_config_t *_pin_config2) 
+
+{
+    
+    Std_ReturnType ret = E_OK ;
+    if(  NULL==_pin_config1 || NULL==_pin_config2 || _pin_config1->pin > PORT_PIN_MAX_NUMBER-1 || _pin_config2->pin > PORT_PIN_MAX_NUMBER-1 ||_pin_config1->port != _pin_config2->port )
+    {
+    ret = E_NOT_OK ; 
+       
+    }
+    
+    else
+    {
+        MOHAMED_TOGGLE_2_BITS(*lat_registers[_pin_config1->port] ,_pin_config1->pin,_pin_config2->pin );
+    
+    }
+    
+    return ret ;
+}
+
+
+
+#endif
+
+/**
+ * 
  * @param _pin_config pointer to the configurations @ref pin_config_t
  * @return status of the function 
  * (E_OK) : the function is done successfully  
